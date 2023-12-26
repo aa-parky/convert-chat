@@ -8,14 +8,18 @@ headers = {
 }
 
 # Define the style prefix
-style_prefix = "Briefly rephrase this in a whimsical and very devious goblin style, without adding explanations or notes, keep the same amount of sentences: "
+style_prefix = ("Act as a very devious goblin."
+                "Convert the selected text keeping the same meaning, "
+                "keep the sentence short. Output only the text and nothing else,"
+                "do not chat, no preamble, get to the point. "
+                "Do not create a list. Keep to a quote only: ")
 def generate_response(prompt):
     # Prepend the style to the user's prompt
     styled_prompt = style_prefix + prompt
 
     # Send only the current styled prompt to the model
     data = {
-        "model": "mistral",
+        "model": "wizard-vicuna-uncensored",
         "stream": False,
         "prompt": styled_prompt,
     }
