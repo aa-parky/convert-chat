@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var ws = new WebSocket("ws://localhost:6789");
+            var messages = document.getElementById("messages");
+
+            ws.onmessage = function(event) {
+                var message = document.createElement("p");
+                message.innerText = event.data;
+                messages.appendChild(message);
+            };
+
+            document.getElementById("sendBtn").onclick = function() {
+                var text = document.getElementById("messageText").value;
+                ws.send(text);
+                document.getElementById("messageText").value = ""; // Clear the input field after sending
+            };
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <input type="text" id="messageText">
+        <button id="sendBtn">Send</button>
+    </div>
+    <div id="messages"></div>
+</body>
+</html>
+

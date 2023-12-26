@@ -1,0 +1,36 @@
+import requests
+import json
+
+url = "http://192.168.1.11:11434/api/generate"
+headers = {
+    'Content-Type': 'application/json',
+}
+
+# Define the style prefix
+style_prefix = ("Convert the selected text keeping the same meaning, "
+                "Act as a very angry goblin. "
+                "Keep the sentence short. Output only the text and nothing else, "
+                "do not chat, no preamble, get to the point. "
+                "Do not create a list. Keep to a quote only: ")
+
+def generate_response(prompt):
+    # Prepend the style to the user's prompt
+    styled_prompt = style_prefix + prompt
+
+    # Send only the current styled prompt to the model
+    data = {
+        "model": "mistral",
+        "stream": False,
+        "prompt": styled_prompt,
+    }
+
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+
+    if response.status_code == 200:
+        response_text = response.text
+        data = json.loads(response_text)
+        actual_response = data["response"]
+        return actual_response
+    else:
+        print("Error:", response.status_code, response.text)
+        return None
