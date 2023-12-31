@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
 <head>
     <title>Chat</title>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            var ws = new WebSocket("ws://localhost:6789");
+            var ws = new WebSocket("ws://86.128.70.62:6789");
             var messages = document.getElementById("messages");
 
             ws.onmessage = function(event) {
@@ -30,4 +29,3 @@
     <div id="messages"></div>
 </body>
 </html>
-
