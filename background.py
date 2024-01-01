@@ -25,7 +25,7 @@ def generate_response(prompt):
 
     # Send only the current styled prompt to the model
     data = {
-        "model": "tinyllama",
+        "model": "solar",
         "stream": False,
         "prompt": styled_prompt,
     }
